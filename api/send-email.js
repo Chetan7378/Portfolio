@@ -1,4 +1,9 @@
-import nodemailer from "nodemailer";
+import sgMail from "@sendgrid/mail";
+
+// Initialize SendGrid with API key from environment
+if (process.env.SENDGRID_API_KEY) {
+  sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+}
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
@@ -11,20 +16,14 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: "Missing required fields" });
   }
 
-  // Create transporter using environment vars configured in Vercel
-  const transporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST,
-    port: process.env.SMTP_PORT ? Number(process.env.SMTP_PORT) : 587,
-    secure: process.env.SMTP_SECURE === "true",
-    auth: {
-      user: process.env.SMTP_USER,
-      pass: process.env.SMTP_PASS,
-    },
-  });
+  if (!process.env.SENDGRID_API_KEY) {
+    console.error("SENDGRID_API_KEY not set");
+    return res.status(500).json({ error: "Email provider not configured" });
+  }
 
-  const mailOptions = {
-    from: process.env.SMTP_FROM || process.env.SMTP_USER,
+  const msg = {
     to: process.env.CONTACT_RECEIVER,
+    from: process.env.SENDGRID_FROM || process.env.CONTACT_RECEIVER,
     subject: `New contact from ${name}`,
     text: `${message}\n\nFrom: ${name} <${email}>`,
     html: `<p>${message}</p><hr/><p>From: ${name} &lt;${email}&gt;</p>`,
@@ -32,10 +31,11 @@ export default async function handler(req, res) {
   };
 
   try {
-    await transporter.sendMail(mailOptions);
+    await sgMail.send(msg);
     return res.status(200).json({ ok: true });
   } catch (err) {
-    console.error("api/send-email error:", err);
-    return res.status(500).json({ error: "Failed to send email" });
+    console.error("SendGrid send error:", err?.response?.body || err);
+    const details = err?.response?.body?.errors || err.message || "Send failed";
+    return res.status(500).json({ error: details });
   }
 }
