@@ -16,17 +16,21 @@ const Contact = () => {
     e.preventDefault();
     setIsSubmitting(true);
     // prevent spam bots (honeypot)
-    const honeypot = e.target.querySelector('#honeypot')?.value;
+    const honeypot = e.target.querySelector("#honeypot")?.value;
     if (honeypot) {
       setIsSubmitting(false);
       return;
     }
 
     try {
-      const apiBase = import.meta.env.VITE_API_URL || 'http://localhost:4000';
+      // Use explicit VITE_API_URL during local development if set.
+      // In production the app will call the relative path `/send-email` (Vercel function).
+      const apiBase =
+        import.meta.env.VITE_API_URL ??
+        (import.meta.env.DEV ? "http://localhost:4000" : "");
       const res = await fetch(`${apiBase}/send-email`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           name: formState.name,
           email: formState.email,
@@ -34,14 +38,14 @@ const Contact = () => {
         }),
       });
 
-      if (!res.ok) throw new Error('Send failed');
+      if (!res.ok) throw new Error("Send failed");
 
       setIsSuccess(true);
-      setFormState({ name: '', email: '', message: '' });
+      setFormState({ name: "", email: "", message: "" });
       setTimeout(() => setIsSuccess(false), 3000);
     } catch (err) {
-      console.error('Send email error', err);
-      alert('Could not send message. Please try again later.');
+      console.error("Send email error", err);
+      alert("Could not send message. Please try again later.");
     } finally {
       setIsSubmitting(false);
     }
