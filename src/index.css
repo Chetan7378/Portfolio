@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-dark-bg text-white overflow-x-hidden;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  cursor: none; /* Hide default cursor for custom one */
+}
+
+/* Ensure links and buttons show the pointer cursor logic via JS or hover states if needed, 
+   but since we have a custom cursor, we usually keep cursor: none or let the custom one handle it. 
+   However, for accessibility/fallback, we might want to only hide it on devices that support hover.
+*/
+@media (hover: hover) and (pointer: fine) {
+  body {
+    cursor: none;
+  }
+  a, button, input, textarea, select {
+    cursor: none;
+  }
+}
+
+@layer utilities {
+  .text-glow {
+    text-shadow: 0 0 10px rgba(0, 243, 255, 0.5), 0 0 20px rgba(0, 243, 255, 0.3);
+  }
+  .text-glow-purple {
+    text-shadow: 0 0 10px rgba(188, 19, 254, 0.5), 0 0 20px rgba(188, 19, 254, 0.3);
+  }
+  .glass-panel {
+    @apply backdrop-blur-lg bg-glass-100 border border-glass-200 shadow-lg;
+  }
+  .neon-border {
+    box-shadow: 0 0 5px theme('colors.neon.blue'), inset 0 0 5px theme('colors.neon.blue');
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.selection {
+  @apply bg-neon-blue text-black;
+}
+::selection {
+  @apply bg-neon-blue text-black;
+}
