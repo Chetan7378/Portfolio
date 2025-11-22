@@ -15,15 +15,36 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
+    // prevent spam bots (honeypot)
+    const honeypot = e.target.querySelector('#honeypot')?.value;
+    if (honeypot) {
+      setIsSubmitting(false);
+      return;
+    }
 
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    try {
+      const apiBase = import.meta.env.VITE_API_URL || 'http://localhost:4000';
+      const res = await fetch(`${apiBase}/send-email`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formState.name,
+          email: formState.email,
+          message: formState.message,
+        }),
+      });
 
-    setIsSubmitting(false);
-    setIsSuccess(true);
-    setFormState({ name: "", email: "", message: "" });
+      if (!res.ok) throw new Error('Send failed');
 
-    setTimeout(() => setIsSuccess(false), 3000);
+      setIsSuccess(true);
+      setFormState({ name: '', email: '', message: '' });
+      setTimeout(() => setIsSuccess(false), 3000);
+    } catch (err) {
+      console.error('Send email error', err);
+      alert('Could not send message. Please try again later.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const copyEmail = () => {

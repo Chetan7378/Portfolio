@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { ArrowDown } from "lucide-react";
+import { ArrowDown, DownloadCloud } from "lucide-react";
 
 const Hero = () => {
   const [mousePosition, setMousePosition] = React.useState({ x: 0, y: 0 });
@@ -118,6 +118,13 @@ const Hero = () => {
             className="px-8 py-4 bg-transparent border border-neon-blue text-neon-blue hover:bg-neon-blue/10 rounded-sm font-mono transition-all duration-300 hover:shadow-[0_0_20px_rgba(0,243,255,0.3)]"
           >
             View Work
+          </a>
+          <a
+            href="/resume.pdf"
+            download
+            className="px-8 py-4 bg-transparent border border-neon-green text-neon-green hover:bg-neon-green/10 rounded-sm font-mono transition-all duration-300 hover:shadow-[0_0_20px_rgba(10,255,0,0.12)] flex items-center gap-2"
+          >
+            <DownloadCloud size={18} /> Resume
           </a>
           <a
             href="#contact"
