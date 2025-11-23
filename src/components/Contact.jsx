@@ -23,26 +23,51 @@ const Contact = () => {
     }
 
     try {
-      // Use explicit VITE_API_URL during local development if set.
-      // In production the app will call the relative path `/send-email` (Vercel function).
-      const apiBase =
-        import.meta.env.VITE_API_URL ??
-        (import.meta.env.DEV ? "http://localhost:4000" : "");
-      const res = await fetch(`${apiBase}/send-email`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: formState.name,
-          email: formState.email,
-          message: formState.message,
-        }),
-      });
+      const serviceId = import.meta.env.VITE_EMAIL_SERVICE_ID;
+      const templateId = import.meta.env.VITE_EMAIL_TEMPLATE_ID;
+      const publicKey = import.meta.env.VITE_EMAIL_PUBLIC_KEY;
 
-      if (!res.ok) throw new Error("Send failed");
+      // If EmailJS env vars are set, use EmailJS clientless REST API (no server required)
+      if (serviceId && templateId && publicKey) {
+        const payload = {
+          service_id: serviceId,
+          template_id: templateId,
+          user_id: publicKey,
+          template_params: {
+            from_name: formState.name,
+            from_email: formState.email,
+            message: formState.message,
+          },
+        };
 
-      setIsSuccess(true);
-      setFormState({ name: "", email: "", message: "" });
-      setTimeout(() => setIsSuccess(false), 3000);
+        // Debug: log env and payload so we can inspect in browser console
+        console.log("EmailJS env:", { serviceId, templateId, publicKey });
+        console.log("EmailJS payload:", payload);
+
+        const res = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+
+        if (!res.ok) {
+          // capture response body for clearer error messages
+          let bodyText = "";
+          try {
+            bodyText = await res.text();
+          } catch (readErr) {
+            console.error("Failed to read EmailJS response body", readErr);
+          }
+          console.error("EmailJS send failed:", res.status, bodyText);
+          // show a user-friendly alert with server message when available
+          alert(`EmailJS error: ${res.status} ${bodyText}`);
+          throw new Error(`EmailJS send failed: ${res.status} ${bodyText}`);
+        }
+
+        setIsSuccess(true);
+        setFormState({ name: "", email: "", message: "" });
+        setTimeout(() => setIsSuccess(false), 3000);
+      }
     } catch (err) {
       console.error("Send email error", err);
       alert("Could not send message. Please try again later.");
