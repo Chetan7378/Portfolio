@@ -112,6 +112,7 @@ const Contact = () => {
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+          {/* LEFT SIDE */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -120,30 +121,65 @@ const Contact = () => {
           >
             <h3 className="text-2xl font-bold mb-6">Let's Talk</h3>
             <div className="space-y-6">
-              <div className="flex items-center gap-4 p-4 bg-glass-100 rounded-lg border border-glass-200">
-                <div className="p-3 bg-neon-pink/10 rounded-full text-neon-pink">
-                  <Mail size={24} />
+              {/* EMAIL CARD */}
+              <div
+                className="
+              relative flex flex-wrap items-center gap-4 p-5 rounded-2xl
+              bg-white/5 backdrop-blur-xl border border-white/10
+              transition-all duration-300
+              hover:border-neon-pink/40 hover:shadow-[0_0_18px_rgba(255,0,128,0.18)]
+            "
+              >
+                <div className="p-3 bg-neon-pink/20 rounded-full text-neon-pink shadow-[0_0_10px_rgba(255,0,128,0.3)]">
+                  <Mail size={26} />
                 </div>
-                <div className="flex-1">
+
+                <div className="flex-1 min-w-[65%]">
                   <p className="text-sm text-gray-400">Email Me</p>
-                  <p className="text-white font-mono">
+                  <p className="text-white font-mono text-lg break-all tracking-wide">
                     chetanshivade73@gmail.com
                   </p>
                 </div>
+
                 <button
                   onClick={copyEmail}
-                  className="p-2 hover:bg-white/10 rounded-full transition-colors"
+                  className="
+                p-3 rounded-full bg-white/10 hover:bg-white/20 transition-all
+                border border-white/20 shadow-[0_0_10px_rgba(255,255,255,0.15)]
+              "
                   aria-label="Copy email"
                 >
                   {copied ? (
-                    <Check size={20} className="text-green-400" />
+                    <Check size={22} className="text-green-400" />
                   ) : (
-                    <Copy size={20} />
+                    <Copy size={22} className="text-white" />
                   )}
                 </button>
+
+                {copied && (
+                  <div
+                    className="
+                  absolute bottom-[-45px] left-1/2 -translate-x-1/2
+                  bg-neon-pink/20 border border-neon-pink/40
+                  backdrop-blur-xl text-neon-pink
+                  px-4 py-1 rounded-full text-sm
+                  shadow-[0_0_12px_rgba(255,0,128,0.5)]
+                  animate-fadeUp
+                "
+                  >
+                    Copied to clipboard!
+                  </div>
+                )}
               </div>
 
-              <div className="p-6 bg-glass-100 rounded-lg border border-glass-200">
+              {/* QUOTE CARD (now same glow style) */}
+              <div
+                className="
+              p-6 bg-white/5 backdrop-blur-xl rounded-2xl border border-white/10
+              transition-all duration-300
+              hover:border-neon-pink/40 hover:shadow-[0_0_18px_rgba(255,0,128,0.18)]
+            "
+              >
                 <p className="text-gray-300 mb-4">
                   "The best way to predict the future is to create it."
                 </p>
@@ -154,6 +190,7 @@ const Contact = () => {
             </div>
           </motion.div>
 
+          {/* RIGHT SIDE FORM */}
           <motion.form
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -162,81 +199,76 @@ const Contact = () => {
             onSubmit={handleSubmit}
             className="space-y-4"
           >
+            {/* INPUTS */}
             <div>
-              <label
-                htmlFor="name"
-                className="block text-sm font-medium text-gray-400 mb-1"
-              >
+              <label className="block text-sm font-medium text-gray-400 mb-1">
                 Name
               </label>
               <input
                 type="text"
-                id="name"
                 required
                 value={formState.name}
                 onChange={(e) =>
                   setFormState({ ...formState, name: e.target.value })
                 }
-                className="w-full bg-glass-100 border border-glass-200 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-neon-pink focus:ring-1 focus:ring-neon-pink transition-all"
+                className="
+              w-full bg-glass-100 border border-glass-200 rounded-lg px-4 py-3 text-white
+              focus:outline-none focus:border-neon-pink focus:ring-1 focus:ring-neon-pink
+              transition-all
+            "
                 placeholder="John Doe"
               />
             </div>
+
             <div>
-              <label
-                htmlFor="email"
-                className="block text-sm font-medium text-gray-400 mb-1"
-              >
+              <label className="block text-sm font-medium text-gray-400 mb-1">
                 Email
               </label>
               <input
                 type="email"
-                id="email"
                 required
                 value={formState.email}
                 onChange={(e) =>
                   setFormState({ ...formState, email: e.target.value })
                 }
-                className="w-full bg-glass-100 border border-glass-200 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-neon-pink focus:ring-1 focus:ring-neon-pink transition-all"
+                className="
+              w-full bg-glass-100 border border-glass-200 rounded-lg px-4 py-3 text-white
+              focus:outline-none focus:border-neon-pink focus:ring-1 focus:ring-neon-pink
+              transition-all
+            "
                 placeholder="john@example.com"
               />
             </div>
+
             <div>
-              <label
-                htmlFor="message"
-                className="block text-sm font-medium text-gray-400 mb-1"
-              >
+              <label className="block text-sm font-medium text-gray-400 mb-1">
                 Message
               </label>
               <textarea
-                id="message"
-                required
                 rows={4}
+                required
                 value={formState.message}
                 onChange={(e) =>
                   setFormState({ ...formState, message: e.target.value })
                 }
-                className="w-full bg-glass-100 border border-glass-200 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-neon-pink focus:ring-1 focus:ring-neon-pink transition-all resize-none"
+                className="
+              w-full bg-glass-100 border border-glass-200 rounded-lg px-4 py-3 text-white resize-none
+              focus:outline-none focus:border-neon-pink focus:ring-1 focus:ring-neon-pink
+              transition-all
+            "
                 placeholder="Your message here..."
               />
             </div>
 
-            <div className="hidden">
-              <label htmlFor="honeypot">
-                Don't fill this out if you're human
-              </label>
-              <input
-                type="text"
-                id="honeypot"
-                name="honeypot"
-                tabIndex="-1"
-                autoComplete="off"
-              />
-            </div>
-
+            {/* SUBMIT BUTTON */}
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full bg-neon-pink text-black font-bold py-4 rounded-lg hover:bg-neon-pink/90 transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="
+            w-full bg-neon-pink text-black font-bold py-4 rounded-lg transition-all
+            flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed
+            hover:shadow-[0_0_20px_rgba(255,0,128,0.3)]
+          "
             >
               {isSubmitting ? (
                 <span className="animate-spin w-5 h-5 border-2 border-black border-t-transparent rounded-full" />

@@ -6,11 +6,20 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setScrolled(window.scrollY > 50);
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    // Use passive listener for better scrolling performance
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () =>
+      window.removeEventListener("scroll", handleScroll, { passive: true });
   }, []);
 
   const navLinks = [

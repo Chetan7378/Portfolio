@@ -5,6 +5,13 @@
   text-align: center;
 }
 
+/* Improve scroll smoothness for anchor links and offset for fixed header */
+html {
+  scroll-behavior: smooth;
+  /* Offset anchored elements so fixed header won't cover them (approx header height 4rem) */
+  scroll-padding-top: 4rem;
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;

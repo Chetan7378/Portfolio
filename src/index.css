@@ -24,23 +24,30 @@ body {
   body {
     cursor: none;
   }
-  a, button, input, textarea, select {
+  a,
+  button,
+  input,
+  textarea,
+  select {
     cursor: none;
   }
 }
 
 @layer utilities {
   .text-glow {
-    text-shadow: 0 0 10px rgba(0, 243, 255, 0.5), 0 0 20px rgba(0, 243, 255, 0.3);
+    text-shadow: 0 0 10px rgba(0, 243, 255, 0.5),
+      0 0 20px rgba(0, 243, 255, 0.3);
   }
   .text-glow-purple {
-    text-shadow: 0 0 10px rgba(188, 19, 254, 0.5), 0 0 20px rgba(188, 19, 254, 0.3);
+    text-shadow: 0 0 10px rgba(188, 19, 254, 0.5),
+      0 0 20px rgba(188, 19, 254, 0.3);
   }
   .glass-panel {
     @apply backdrop-blur-lg bg-glass-100 border border-glass-200 shadow-lg;
   }
   .neon-border {
-    box-shadow: 0 0 5px theme('colors.neon.blue'), inset 0 0 5px theme('colors.neon.blue');
+    box-shadow: 0 0 5px theme("colors.neon.blue"),
+      inset 0 0 5px theme("colors.neon.blue");
   }
 }
 
