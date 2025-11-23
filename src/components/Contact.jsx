@@ -84,7 +84,8 @@ const Contact = () => {
   const copyEmail = () => {
     navigator.clipboard.writeText("chetanshivade73@gmail.com");
     setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    // shorter display duration
+    setTimeout(() => setCopied(false), 1200);
   };
 
   return (
@@ -159,11 +160,13 @@ const Contact = () => {
                 {copied && (
                   <div
                     className={
-                      "absolute bottom-[-32px] left-1/2 -translate-x-1/2 " +
+                      "absolute top-[-40px] left-1/2 -translate-x-1/2 " +
                       "bg-neon-pink/18 border border-neon-pink/30 " +
                       "backdrop-blur-sm text-neon-pink px-3 py-0.5 rounded-md text-xs " +
                       "shadow-sm max-w-xs whitespace-nowrap animate-fadeUp"
                     }
+                    role="status"
+                    aria-live="polite"
                   >
                     Copied to clipboard!
                   </div>
