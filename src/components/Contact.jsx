@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, time } from "framer-motion";
 import { Mail, Send, Copy, Check } from "lucide-react";
+import { title } from "framer-motion/client";
+const now = new Date();
 
 const Contact = () => {
   const [formState, setFormState] = useState({
@@ -34,9 +36,12 @@ const Contact = () => {
           template_id: templateId,
           user_id: publicKey,
           template_params: {
-            from_name: formState.name,
-            from_email: formState.email,
+            name: formState.name,
+            email: formState.email,
             message: formState.message,
+            time: now.toLocaleString(),
+            title: "New Contact Form Submission",
+            reply_to: formState.email,
           },
         };
 
