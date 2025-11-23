@@ -158,14 +158,12 @@ const Contact = () => {
 
                 {copied && (
                   <div
-                    className="
-                  absolute bottom-[-45px] left-1/2 -translate-x-1/2
-                  bg-neon-pink/20 border border-neon-pink/40
-                  backdrop-blur-xl text-neon-pink
-                  px-4 py-1 rounded-full text-sm
-                  shadow-[0_0_12px_rgba(255,0,128,0.5)]
-                  animate-fadeUp
-                "
+                    className={
+                      "absolute bottom-[-32px] left-1/2 -translate-x-1/2 " +
+                      "bg-neon-pink/18 border border-neon-pink/30 " +
+                      "backdrop-blur-sm text-neon-pink px-3 py-0.5 rounded-md text-xs " +
+                      "shadow-sm max-w-xs whitespace-nowrap animate-fadeUp"
+                    }
                   >
                     Copied to clipboard!
                   </div>
