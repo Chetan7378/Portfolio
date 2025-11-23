@@ -32,7 +32,7 @@ A high-performance, accessible, and visually stunning portfolio website built wi
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/yourusername/portfolio.git
+   git clone https://github.com/Chetan7378/portfolio.git
    cd portfolio
    ```
 
