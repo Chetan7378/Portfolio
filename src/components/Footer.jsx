@@ -32,10 +32,12 @@ const Footer = () => {
           </a>
         </div>
 
-        <p className="text-gray-500 text-sm font-mono flex items-center gap-2">
+        <p className="text-gray-500 text-sm font-mono text-center leading-relaxed flex flex-wrap justify-center gap-1">
           Designed & Built with{" "}
-          <Heart size={14} className="text-neon-pink fill-neon-pink" /> by
-          Chetan Shivade © {new Date().getFullYear()}
+          <Heart size={14} className="inline text-neon-pink fill-neon-pink" />{" "}
+          <span className="w-full sm:w-auto text-center">
+            by Chetan Shivade © {new Date().getFullYear()}
+          </span>
         </p>
       </div>
     </footer>
