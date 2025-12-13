@@ -120,7 +120,7 @@ const Hero = () => {
             View Work
           </a>
           <a
-            href="/chetan_shivade_AI_DEV.pdf"
+            href="/Chetan_AI_DEV_1YOE.pdf"
             download
             className="px-8 py-4 bg-transparent border border-neon-green text-neon-green hover:bg-neon-green/10 rounded-sm font-mono transition-all duration-300 hover:shadow-[0_0_20px_rgba(10,255,0,0.12)] flex items-center gap-2"
           >
