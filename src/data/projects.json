@@ -1,6 +1,26 @@
 [
   {
     "id": 1,
+    "title": "Enterprise-RAG",
+    "category": "AI",
+    "image": "/unnamed3.jpg",
+    "summary": "A high-performance RAG pipeline for automated knowledge synthesis and contextual document retrieval across enterprise data silos.",
+    "description": "This system implements a Retrieval-Augmented Generation (RAG) architecture to bridge the gap between static LLMs and dynamic organizational data. It features a multi-stage pipeline involving document chunking, vector embedding generation, and semantic search via a vector database. By retrieving relevant context in real-time before response generation, the system minimizes hallucinations and provides cited, verifiable insights from internal knowledge bases. Optimized for enterprise scale, it supports complex query analysis and automated report generation.",
+    "tech": [
+      "Python",
+      "LangChain",
+      "Pinecone",
+      "OpenAI",
+      "FAISS",
+      "Sentence Transformers"
+    ],
+    "links": {
+      "live": "#",
+      "repo": "https://github.com/Chetan7378/Enterprise-Retrieval-Augmented-Generation-RAG-System"
+    }
+  },
+  {
+    "id": 2,
     "title": "Graph RAG Chatbot",
     "category": "AI",
     "image": "/KG.png",
@@ -21,7 +41,7 @@
     }
   },
   {
-    "id": 2,
+    "id": 3,
     "title": "Candidate Assessment Tool",
     "category": "BACKEND",
     "image": "/Candi.png",
@@ -41,7 +61,7 @@
     }
   },
   {
-    "id": 3,
+    "id": 4,
     "title": "BLACK SPOT DETECTION",
     "category": "WEB",
     "image": "/black.png",
@@ -54,7 +74,7 @@
     }
   },
   {
-    "id": 4,
+    "id": 5,
     "title": "Zerodha Clone",
     "category": "Web",
     "image": "/zeroda.png",
@@ -64,19 +84,6 @@
     "links": {
       "live": "#",
       "repo": "https://github.com/Chetan7378/Zerodha-Mern-App"
-    }
-  },
-  {
-    "id": 5,
-    "title": "Visionary",
-    "category": "ML",
-    "image": "/image.png",
-    "summary": "A real-time defect detection system powered by deep learning, built for high-precision manufacturing quality control.",
-    "description": "Visionary is an edge-optimized ML application that uses advanced computer vision models to detect defects in production lines with 99.9% accuracy. It processes live video feeds in real time, enabling manufacturers to identify anomalies instantly and reduce production errors. Designed for low-latency inference on edge devices, the system significantly improves output quality, operational efficiency, and automated quality assurance workflows.",
-    "tech": ["Python", "TensorFlow", "OpenCV", "AZURE", "FastAPI"],
-    "links": {
-      "live": "#",
-      "repo": "https://github.com/Chetan7378/SMB-Financial-Management-Tool"
     }
   },
   {

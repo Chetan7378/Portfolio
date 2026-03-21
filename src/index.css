@@ -13,40 +13,28 @@ html {
 body {
   @apply bg-dark-bg text-white overflow-x-hidden;
   font-feature-settings: "cv02", "cv03", "cv04", "cv11";
-  cursor: none; /* Hide default cursor for custom one */
+  cursor: auto; /* Enable default cursor */
 }
 
-/* Ensure links and buttons show the pointer cursor logic via JS or hover states if needed, 
-   but since we have a custom cursor, we usually keep cursor: none or let the custom one handle it. 
-   However, for accessibility/fallback, we might want to only hide it on devices that support hover.
-*/
-@media (hover: hover) and (pointer: fine) {
-  body {
-    cursor: none;
-  }
-  a,
-  button,
-  input,
-  textarea,
-  select {
-    cursor: none;
-  }
-}
+/* Custom cursor disabled - using default cursor */
 
 @layer utilities {
   .text-glow {
-    text-shadow: 0 0 10px rgba(0, 243, 255, 0.5),
+    text-shadow:
+      0 0 10px rgba(0, 243, 255, 0.5),
       0 0 20px rgba(0, 243, 255, 0.3);
   }
   .text-glow-purple {
-    text-shadow: 0 0 10px rgba(188, 19, 254, 0.5),
+    text-shadow:
+      0 0 10px rgba(188, 19, 254, 0.5),
       0 0 20px rgba(188, 19, 254, 0.3);
   }
   .glass-panel {
     @apply backdrop-blur-lg bg-glass-100 border border-glass-200 shadow-lg;
   }
   .neon-border {
-    box-shadow: 0 0 5px theme("colors.neon.blue"),
+    box-shadow:
+      0 0 5px theme("colors.neon.blue"),
       inset 0 0 5px theme("colors.neon.blue");
   }
 }
